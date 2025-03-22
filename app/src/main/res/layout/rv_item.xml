@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="10dp"
-    android:layout_margin="15dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="20dp"
     app:cardBackgroundColor="@color/purple_200"
     cardElevation="10dp"
@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/cName"
         android:text="Currancy Name"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
 
         />
     <TextView
@@ -29,6 +31,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/cPrice"
         android:text="Currancy price"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
 
         />
     <TextView
@@ -36,6 +40,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/cSymbol"
         android:text="Currancy symbol"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
 
         />
     </LinearLayout>

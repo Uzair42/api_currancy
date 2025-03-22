@@ -24,8 +24,8 @@ RecyclerView.Adapter<rvAdapter.myViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myViewHolder {
 
-        val myView= RvItemBinding.inflate(LayoutInflater.from(context),parent,false)
-            return myViewHolder(myView)
+        val myitemView=RvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return myViewHolder(myitemView)
 
     }
 
@@ -38,5 +38,6 @@ RecyclerView.Adapter<rvAdapter.myViewHolder>()
         holder.rbinding.cName.text=listData[position].cName
         holder.rbinding.cPrice.text=listData[position].cPrice
         holder.rbinding.cSymbol.text=listData[position].cSymbol
+//        notifyDataSetChanged()
     }
 }
