@@ -1,6 +1,9 @@
 package com.mu42.vidcryptocurrancylist
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +17,7 @@ import com.android.volley.toolbox.Volley
 import com.mu42.vidcryptocurrancylist.databinding.HomePageBinding
 import com.mu42.vidcryptocurrancylist.ui.theme.model
 import com.mu42.vidcryptocurrancylist.ui.theme.rvAdapter
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,7 +48,45 @@ class MainActivity : AppCompatActivity() {
         myBinding.rvContainer.adapter = rvAdapter
 
 
+
+        // listener of Search
+        myBinding.Search.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+          val filterData=ArrayList<model>()
+                for ( item in data )
+                {
+                    if(item.cName!!.lowercase(Locale.getDefault()).contains(p0.toString().lowercase(
+                            Locale.getDefault())))
+                    {
+                        filterData.add(item)
+
+                    }
+
+
+                }
+                if(filterData.isEmpty())
+                {
+                    Toast.makeText(this@MainActivity," Not Found  ${p0.toString()}",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    rvAdapter.ChangedData(filterData)
+                }
+
+
+            }
+
+        })
     }
+
 
 
     val apiData: Unit
@@ -56,13 +98,14 @@ class MainActivity : AppCompatActivity() {
             val volleyQueue = Volley.newRequestQueue(this)
 
             val jsonObjectReq: JsonObjectRequest =
+                @SuppressLint("NotifyDataSetChanged")
                 object : JsonObjectRequest(Method.GET, url, null,
 
 
                     Response.Listener { response ->
-                         try {
+                        try {
                             val dataArray = response.getJSONArray("data")
-Toast.makeText(this,"Loading data ---", Toast.LENGTH_LONG).show()
+                           Toast.makeText(this,"Data Loaded ", Toast.LENGTH_SHORT).show()
 
                             for(i in 0 until   dataArray.length())
                             {
